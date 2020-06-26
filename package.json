@@ -1,8 +1,8 @@
 {
-  "name": "express-postgres-starter",
+  "name": "hello-world-server",
   "private": true,
   "version": "1.0.0",
-  "description": "Starter project using Express and Postgres",
+  "description": "Server for HelloWorld!<>",
   "main": "config.js",
   "scripts": {
     "test": "xo",
@@ -40,10 +40,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HugoDF/express-postgres-starter.git"
+    "url": "git+https://github.com/aaronsms/HelloWorldServer.git"
   },
   "bugs": {
-    "url": "https://github.com/HugoDF/express-postgres-starter/issues"
+    "url": "https://github.com/aaronsms/HelloWorldServer/issues"
   },
-  "homepage": "https://github.com/HugoDF/express-postgres-starter#readme"
+  "homepage": "https://github.com/aaronsms/HelloWorldServer#readme"
 }
