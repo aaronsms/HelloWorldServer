@@ -38,6 +38,11 @@
     "prettier": true,
     "space": true
   },
+  "prettier": {
+    "singleQuote": true,
+    "bracketSpacing": false,
+    "trailingComma": "none"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aaronsms/HelloWorldServer.git"
