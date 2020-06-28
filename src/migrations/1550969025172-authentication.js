@@ -18,13 +18,24 @@ module.exports.up = async function (next) {
 
   CREATE TABLE IF NOT EXISTS learners (
     id uuid PRIMARY KEY,
-    user_id uuid REFERENCES users (id),
-  )
+    user_id uuid REFERENCES users (id) ON DELETE CASCADE,
+    biography text,
+    locations text[],
+    learning_languages json,
+    speaking_languages json,
+    profile_picture text
+  );
 
   CREATE TABLE IF NOT EXISTS mentors (
     id uuid PRIMARY KEY,
-    user_id uuid REFERENCES users (id),
-  )
+    user_id uuid REFERENCES users (id) ON DELETE CASCADE,
+    biography text,
+    locations text[],
+    learning_languages json,
+    speaking_languages json,
+    teaching_languages json,
+    profile_picture text
+  );
   `);
 
   await client.query(`
