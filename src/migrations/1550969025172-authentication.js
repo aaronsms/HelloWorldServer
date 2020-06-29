@@ -57,9 +57,9 @@ module.exports.down = async function (next) {
 
   await client.query(`
   DROP TABLE sessions;
-  DROP TABLE users;
   DROP TABLE learners;
   DROP TABLE mentors;
+  DROP TABLE users;
   `);
 
   await client.release(true);
