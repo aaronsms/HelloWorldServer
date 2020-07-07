@@ -26,6 +26,7 @@ module.exports = {
   async createLearnerOrMentor({
     id,
     userId,
+    name,
     biography, // Nullable
     locations, // Nullable
     learningLanguages, // Nullable
@@ -38,9 +39,9 @@ module.exports = {
       let rows;
       if (isLearnerOrMentor) {
         ({rows} = await db.query(sql`
-        INSERT INTO learners (id, user_id, biography, profile_picture,
+        INSERT INTO learners (id, user_id, name, biography, profile_picture,
           locations, learning_languages, speaking_languages)
-          VALUES (${id}, ${userId}, ${biography}, ${profilePicture},
+          VALUES (${id}, ${userId}, ${name}, ${biography}, ${profilePicture},
             ${locations}, ${learningLanguages}, ${speakingLanguages})
           RETURNING id, user_id;
         `));

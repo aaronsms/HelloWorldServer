@@ -19,6 +19,7 @@ module.exports.up = async function (next) {
   CREATE TABLE IF NOT EXISTS learners (
     id uuid PRIMARY KEY,
     user_id uuid REFERENCES users (id) ON DELETE CASCADE,
+    name text,
     biography text,
     locations text[],
     learning_languages json,
@@ -29,6 +30,7 @@ module.exports.up = async function (next) {
   CREATE TABLE IF NOT EXISTS mentors (
     id uuid PRIMARY KEY,
     user_id uuid REFERENCES users (id) ON DELETE CASCADE,
+    name text,
     biography text,
     locations text[],
     learning_languages json,
