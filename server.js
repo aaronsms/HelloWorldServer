@@ -7,6 +7,8 @@ const helmet = require('helmet');
 const {SESSION_SECRET} = require('./config');
 
 const app = express();
+const ws = require('express-ws')(app);
+
 const api = require('./src/api');
 
 app.get('/', (request, response) => response.sendStatus(200));
@@ -14,6 +16,7 @@ app.get('/health', (request, response) => response.sendStatus(200));
 
 app.use(morgan('short'));
 app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({extended: 'true'}));
 app.use(
   clientSession({
     cookieName: 'session',

@@ -23,52 +23,31 @@ module.exports = {
       throw error;
     }
   },
-  async createLearnerOrMentor({
-    id,
-    userId,
-    name,
-    biography, // Nullable
-    locations, // Nullable
-    learningLanguages, // Nullable
-    speakingLanguages, // Nullable
-    teachingLanguages, // Nullable
-    profilePicture, // Nullable
-    isLearnerOrMentor
-  } = {}) {
-    try {
-      let rows;
-      if (isLearnerOrMentor) {
-        ({rows} = await db.query(sql`
-        INSERT INTO learners (id, user_id, name, biography, profile_picture,
-          locations, learning_languages, speaking_languages)
-          VALUES (${id}, ${userId}, ${name}, ${biography}, ${profilePicture},
-            ${locations}, ${learningLanguages}, ${speakingLanguages})
-          RETURNING id, user_id;
-        `));
-      } else {
-        ({rows} = await db.query(sql`
-        INSERT INTO mentors (id, user_id, biography, profile_picture,
-          locations, learning_languages, speaking_languages, teaching_languages)
-          VALUES (${id}, ${userId}, ${biography}, ${profilePicture},
-            ${locations}, ${learningLanguages}, ${speakingLanguages}, ${teachingLanguages})
-          RETURNING id, user_id;
-        `));
-      }
-
-      const [learnerOrMentor] = rows;
-      return learnerOrMentor;
-    } catch (error) {
-      if (error.constraint === 'users_pkey') {
-        return null;
-      }
-
-      throw error;
-    }
-  },
   async find(email) {
     const {rows} = await db.query(sql`
     SELECT * FROM users WHERE email=${email} LIMIT 1;
     `);
     return rows[0];
+  },
+  async getProfile(userId) {
+    const {rows: learner} = await db.query(sql`
+    SELECT * FROM learners
+    WHERE user_id=${userId};
+    `);
+
+    const {rows: mentor} = await db.query(sql`
+    SELECT * FROM mentors
+    WHERE user_id=${userId};
+    `);
+  
+    if (learner.length !== 0) {
+      return learner[0];
+    }
+
+    if (mentor.length !== 0) {
+      return mentor[0];
+    }
+
+    return {};
   }
 };
